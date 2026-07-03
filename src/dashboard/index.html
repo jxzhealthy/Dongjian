@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dongjian - 代码知识图谱</title>
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        #cy { width: 100vw; height: 100vh; background: #f5f7fa; }
+        .header { position: fixed; top: 0; left: 0; right: 0; padding: 12px 24px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e5e7eb; z-index: 10; display: flex; align-items: center; justify-content: space-between; }
+        .header h1 { margin: 0; font-size: 18px; color: #1f2937; }
+        .stats { font-size: 13px; color: #6b7280; }
+        .legend { position: fixed; bottom: 20px; left: 20px; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 12px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.file { background: #3b82f6; }
+        .dot.class { background: #10b981; }
+        .dot.function { background: #f59e0b; }
+        .dot.variable { background: #8b5cf6; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Dongjian (洞见) - 代码知识图谱</h1>
+        <div class="stats" id="stats">加载中...</div>
+    </div>
+    <div id="cy"></div>
+    <div class="legend">
+        <div class="legend-item"><span class="dot file"></span> 文件</div>
+        <div class="legend-item"><span class="dot class"></span> 类</div>
+        <div class="legend-item"><span class="dot function"></span> 函数/方法</div>
+        <div class="legend-item"><span class="dot variable"></span> 接口/变量</div>
+    </div>
+
+    <script>
+        const colors = { file: '#3b82f6', class: '#10b981', function: '#f59e0b', variable: '#8b5cf6' };
+        const edgeColors = { contains: '#9ca3af', calls: '#ef4444', imports: '#6366f1' };
+
+        async function loadGraph() {
+            try {
+                const response = await fetch('dongjian-graph.json');
+                const data = await response.json();
+                
+                const elements = [];
+                
+                // 添加节点
+                data.nodes.forEach(node => {
+                    elements.push({
+                        data: {
+                            id: node.id,
+                            label: node.label,
+                            type: node.type,
+                            summary: node.summary || ''
+                        }
+                    });
+                });
+
+                // 添加边
+                data.edges.forEach(edge => {
+                    elements.push({
+                        data: {
+                            source: edge.source,
+                            target: edge.target,
+                            type: edge.type
+                        }
+                    });
+                });
+
+                const cy = cytoscape({
+                    container: document.getElementById('cy'),
+                    elements: elements,
+                    style: [
+                        {
+                            selector: 'node',
+                            style: {
+                                'background-color': ele => colors[ele.data('type')] || '#6b7280',
+                                'label': 'data(label)',
+                                'font-size': '12px',
+                                'text-valign': 'bottom',
+                                'text-halign': 'center',
+                                'width': ele => ele.data('type') === 'file' ? 60 : 40,
+                                'height': ele => ele.data('type') === 'file' ? 60 : 40,
+                                'shape': 'ellipse'
+                            }
+                        },
+                        {
+                            selector: 'edge',
+                            style: {
+                                'width': 2,
+                                'line-color': ele => edgeColors[ele.data('type')] || '#9ca3af',
+                                'target-arrow-color': ele => edgeColors[ele.data('type')] || '#9ca3af',
+                                'target-arrow-shape': 'triangle',
+                                'curve-style': 'bezier',
+                                'label': ele => ele.data('type') === 'calls' ? 'calls' : '',
+                                'font-size': '10px',
+                                'color': '#ef4444'
+                            }
+                        }
+                    ],
+                    layout: {
+                        name: 'cose',
+                        animate: true,
+                        animationDuration: 500,
+                        nodeRepulsion: 4500,
+                        idealEdgeLength: 100
+                    }
+                });
+
+                // 更新统计信息
+                document.getElementById('stats').textContent = 
+                    `${data.nodes.length} 个节点, ${data.edges.length} 条边`;
+
+                // 点击节点显示详情
+                cy.on('tap', 'node', function(evt) {
+                    const node = evt.target;
+                    console.log('Node:', node.data());
+                });
+
+            } catch (error) {
+                console.error('加载图谱失败:', error);
+                document.getElementById('stats').textContent = '加载失败';
+            }
+        }
+
+        loadGraph();
+    </script>
+</body>
+</html>

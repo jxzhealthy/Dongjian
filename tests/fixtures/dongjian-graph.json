@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "name": "fixtures",
+    "last_updated": "2026-07-03T06:38:41.436Z",
+    "language_stats": {}
+  },
+  "nodes": [
+    {
+      "id": "file:sample-service.ts",
+      "type": "file",
+      "label": "sample-service.ts",
+      "summary": "Source file: sample-service.ts"
+    },
+    {
+      "id": "file:sample-service.ts:UserService",
+      "type": "class",
+      "label": "UserService",
+      "parent_id": "file:sample-service.ts"
+    },
+    {
+      "id": "file:sample-service.ts:UserService:getUserById",
+      "type": "function",
+      "label": "getUserById",
+      "parent_id": "file:sample-service.ts:UserService"
+    },
+    {
+      "id": "file:sample-service.ts:UserService:createUser",
+      "type": "function",
+      "label": "createUser",
+      "parent_id": "file:sample-service.ts:UserService"
+    },
+    {
+      "id": "file:sample-service.ts:UserService:deleteUser",
+      "type": "function",
+      "label": "deleteUser",
+      "parent_id": "file:sample-service.ts:UserService"
+    },
+    {
+      "id": "file:sample-service.ts:User",
+      "type": "variable",
+      "label": "User",
+      "parent_id": "file:sample-service.ts"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:sample-service.ts",
+      "target": "file:sample-service.ts:UserService",
+      "type": "contains"
+    },
+    {
+      "source": "file:sample-service.ts:UserService",
+      "target": "file:sample-service.ts:UserService:getUserById",
+      "type": "contains"
+    },
+    {
+      "source": "file:sample-service.ts:UserService:getUserById",
+      "target": "func:this.users.find",
+      "type": "calls"
+    },
+    {
+      "source": "file:sample-service.ts:UserService",
+      "target": "file:sample-service.ts:UserService:createUser",
+      "type": "contains"
+    },
+    {
+      "source": "file:sample-service.ts:UserService:createUser",
+      "target": "func:Date.now",
+      "type": "calls"
+    },
+    {
+      "source": "file:sample-service.ts:UserService:createUser",
+      "target": "func:this.users.push",
+      "type": "calls"
+    },
+    {
+      "source": "file:sample-service.ts:UserService",
+      "target": "file:sample-service.ts:UserService:deleteUser",
+      "type": "contains"
+    },
+    {
+      "source": "file:sample-service.ts:UserService:deleteUser",
+      "target": "func:this.users.findIndex",
+      "type": "calls"
+    },
+    {
+      "source": "file:sample-service.ts:UserService:deleteUser",
+      "target": "func:this.users.splice",
+      "type": "calls"
+    },
+    {
+      "source": "file:sample-service.ts",
+      "target": "file:sample-service.ts:User",
+      "type": "contains"
+    }
+  ]
+}
