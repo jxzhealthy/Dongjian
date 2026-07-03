@@ -1,6 +1,6 @@
 {
   "name": "dongjian",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "洞见：将代码库转化为可交互的知识图谱",
   "main": "dist/index.js",
   "bin": {
