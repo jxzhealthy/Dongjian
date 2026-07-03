@@ -42,6 +42,7 @@ const path = __importStar(require("path"));
 const tree_sitter_1 = __importDefault(require("tree-sitter"));
 const tree_sitter_typescript_1 = __importDefault(require("tree-sitter-typescript"));
 const import_extractor_1 = require("./import-extractor");
+const file_analyzer_1 = require("../agents/file-analyzer");
 // 辅助函数：通过类型查找子节点
 function findChildByType(node, type) {
     for (let i = 0; i < node.childCount; i++) {
@@ -128,6 +129,13 @@ async function parseProject(rootPath) {
             }
             // 3. 提取函数和类
             extractDeclarations(tree.rootNode, fileNodeId, nodes, edges);
+            // 4. AI 语义分析（生成摘要与架构分层）
+            const analysis = await (0, file_analyzer_1.analyzeFile)(content, relativePath);
+            const fileNode = nodes.find(n => n.id === fileNodeId);
+            if (fileNode) {
+                fileNode.summary = analysis.summary;
+                fileNode.architecture_layer = analysis.architecture_layer;
+            }
         }
         catch (error) {
             console.warn(`[Scanner] 解析失败: ${filePath}`, error);

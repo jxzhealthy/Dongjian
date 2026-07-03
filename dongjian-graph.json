@@ -2,21 +2,73 @@
   "version": "1.0",
   "metadata": {
     "name": ".",
-    "last_updated": "2026-07-03T06:39:25.561Z",
+    "last_updated": "2026-07-03T06:41:55.555Z",
     "language_stats": {}
   },
   "nodes": [
     {
+      "id": "file:src/agents/file-analyzer.ts",
+      "type": "file",
+      "label": "file-analyzer.ts",
+      "summary": "This file (src/agents/file-analyzer.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
+    },
+    {
+      "id": "file:src/agents/file-analyzer.ts:AnalysisResult",
+      "type": "variable",
+      "label": "AnalysisResult",
+      "parent_id": "file:src/agents/file-analyzer.ts"
+    },
+    {
+      "id": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "type": "function",
+      "label": "analyzeFile",
+      "parent_id": "file:src/agents/file-analyzer.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts",
+      "type": "file",
+      "label": "incremental-sync.ts",
+      "summary": "This file (src/core/incremental-sync.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:FileChange",
+      "type": "variable",
+      "label": "FileChange",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:calculateHash",
+      "type": "function",
+      "label": "calculateHash",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:detectChanges",
+      "type": "function",
+      "label": "detectChanges",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:getAllFiles",
+      "type": "function",
+      "label": "getAllFiles",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
       "id": "file:src/index.ts",
       "type": "file",
       "label": "index.ts",
-      "summary": "Source file: src/index.ts"
+      "summary": "This file (src/index.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
     },
     {
       "id": "file:src/parser/import-extractor.ts",
       "type": "file",
       "label": "import-extractor.ts",
-      "summary": "Source file: src/parser/import-extractor.ts"
+      "summary": "This file (src/parser/import-extractor.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
     },
     {
       "id": "file:src/parser/import-extractor.ts:ImportInfo",
@@ -34,7 +86,8 @@
       "id": "file:src/parser/project-scanner.ts",
       "type": "file",
       "label": "project-scanner.ts",
-      "summary": "Source file: src/parser/project-scanner.ts"
+      "summary": "This file (src/parser/project-scanner.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
     },
     {
       "id": "file:src/parser/project-scanner.ts:GraphNode",
@@ -106,13 +159,15 @@
       "id": "file:src/types/tree-sitter-typescript.d.ts",
       "type": "file",
       "label": "tree-sitter-typescript.d.ts",
-      "summary": "Source file: src/types/tree-sitter-typescript.d.ts"
+      "summary": "This file (src/types/tree-sitter-typescript.d.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
     },
     {
       "id": "file:tests/fixtures/sample-service.ts",
       "type": "file",
       "label": "sample-service.ts",
-      "summary": "Source file: tests/fixtures/sample-service.ts"
+      "summary": "This file (tests/fixtures/sample-service.ts) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.",
+      "architecture_layer": "unknown"
     },
     {
       "id": "file:tests/fixtures/sample-service.ts:UserService",
@@ -146,6 +201,181 @@
     }
   ],
   "edges": [
+    {
+      "source": "file:src/agents/file-analyzer.ts",
+      "target": "file:src/agents/file-analyzer.ts:AnalysisResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts",
+      "target": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:console.log",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "target": "func:filePath.includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:FileChange",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:calculateHash",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:calculateHash",
+      "target": "func:crypto.createHash('sha256').update(content).digest",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:calculateHash",
+      "target": "func:crypto.createHash('sha256').update",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:calculateHash",
+      "target": "func:crypto.createHash",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:detectChanges",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:getAllFiles",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:filePath.endsWith",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:filePath.endsWith",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:fs.readFileSync",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:calculateHash",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:changes.push",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:changes.push",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:console.warn",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:detectChanges",
+      "target": "func:changes.push",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:getAllFiles",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:fs.readdirSync",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:files.forEach",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:require('path').join",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:require",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:fs.statSync(filePath).isDirectory",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:fs.statSync",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:['node_modules', '.git', 'dist'].includes",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:getAllFiles",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts:getAllFiles",
+      "target": "func:arrayOfFiles.push",
+      "type": "calls"
+    },
     {
       "source": "file:src/index.ts",
       "target": "file:src/parser/project-scanner.ts",
@@ -224,6 +454,16 @@
     {
       "source": "file:src/parser/project-scanner.ts",
       "target": "file:src/parser/import-extractor.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/agents/file-analyzer.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/core/incremental-sync.ts",
       "type": "imports"
     },
     {
@@ -434,6 +674,16 @@
     {
       "source": "file:src/parser/project-scanner.ts:parseProject",
       "target": "func:extractDeclarations",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts:parseProject",
+      "target": "func:analyzeFile",
+      "type": "calls"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts:parseProject",
+      "target": "func:nodes.find",
       "type": "calls"
     },
     {

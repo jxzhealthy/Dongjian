@@ -3,6 +3,8 @@ import * as path from 'path';
 import Parser from 'tree-sitter';
 import TypeScript from 'tree-sitter-typescript';
 import { extractImports } from './import-extractor';
+import { analyzeFile } from '../agents/file-analyzer';
+import { calculateHash, detectChanges } from '../core/incremental-sync';
 
 export interface GraphNode {
   id: string;
@@ -133,6 +135,14 @@ export async function parseProject(rootPath: string): Promise<void> {
 
       // 3. 提取函数和类
       extractDeclarations(tree.rootNode, fileNodeId, nodes, edges);
+
+      // 4. AI 语义分析（生成摘要与架构分层）
+      const analysis = await analyzeFile(content, relativePath);
+      const fileNode = nodes.find(n => n.id === fileNodeId);
+      if (fileNode) {
+        fileNode.summary = analysis.summary;
+        fileNode.architecture_layer = analysis.architecture_layer;
+      }
 
     } catch (error) {
       console.warn(`[Scanner] 解析失败: ${filePath}`, error);
