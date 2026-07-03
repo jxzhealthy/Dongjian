@@ -12,6 +12,7 @@ tsconfig.json
 # 临时文件与测试数据
 *.log
 my-test-graph.json
+test-result.json
 .env
 
 # 文档（保留 README 和 LICENSE，排除深度技术文档）
