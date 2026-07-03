@@ -2,32 +2,82 @@
  * 文件分析器 Agent
  * 负责调用 LLM 生成代码摘要和识别架构层级
  */
+import OpenAI from 'openai';
 
 export interface AnalysisResult {
   summary: string;
-  architecture_layer?: 'api' | 'service' | 'data' | 'util' | 'unknown';
+  architecture_layer?: 'api' | 'service' | 'data' | 'util' | 'core' | 'unknown';
   key_concepts: string[];
 }
 
+const client = process.env.DASHSCOPE_API_KEY 
+  ? new OpenAI({
+      apiKey: process.env.DASHSCOPE_API_KEY,
+      baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    })
+  : null;
+
 /**
- * 模拟 LLM 调用（实际项目中应接入 DashScope/Qwen 等）
+ * 调用 Qwen3.7-max 进行代码语义分析
  */
 export async function analyzeFile(content: string, filePath: string): Promise<AnalysisResult> {
-  // TODO: 替换为真实的 LLM API 调用
-  // const response = await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation', { ... });
+  if (!process.env.DASHSCOPE_API_KEY) {
+    console.warn('[Agent] 未检测到 DASHSCOPE_API_KEY，使用启发式占位符。');
+    return getHeuristicAnalysis(filePath);
+  }
+
+  console.log(`[Agent] 正在通过 Qwen3.7-max 分析: ${filePath}`);
   
-  console.log(`[Agent] 正在分析文件语义: ${filePath}`);
-  
-  // 简单的启发式规则作为占位符
+  const prompt = `
+请分析以下 TypeScript 代码文件：${filePath}
+
+代码内容：
+\`\`\`typescript
+${content.substring(0, 4000)} 
+\`\`\`
+
+请以 JSON 格式返回以下信息（不要包含 markdown 代码块标记）：
+{
+  "summary": "用一句话精炼总结该文件的核心职责和业务逻辑",
+  "architecture_layer": "判断该文件属于哪一层: api(接口层), service(业务逻辑层), data(数据层), util(工具层), core(核心引擎层)",
+  "key_concepts": ["列出3-5个该文件中出现的关键技术点或业务概念"]
+}
+`;
+
+  try {
+    if (!client) throw new Error('Client not initialized');
+    const completion = await client.chat.completions.create({
+      model: "qwen3.7-max",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.0,
+      max_tokens: 1024,
+    });
+
+    const resultStr = completion.choices[0].message.content || '{}';
+    const result = JSON.parse(resultStr);
+
+    return {
+      summary: result.summary || '分析失败',
+      architecture_layer: result.architecture_layer || 'unknown',
+      key_concepts: result.key_concepts || []
+    };
+  } catch (error) {
+    console.error('[Agent] LLM 调用失败:', error);
+    return getHeuristicAnalysis(filePath);
+  }
+}
+
+function getHeuristicAnalysis(filePath: string): AnalysisResult {
   let layer: AnalysisResult['architecture_layer'] = 'unknown';
-  if (filePath.includes('/api/') || filePath.includes('/controller/')) layer = 'api';
+  if (filePath.includes('/parser/')) layer = 'core';
+  else if (filePath.includes('/api/')) layer = 'api';
   else if (filePath.includes('/service/')) layer = 'service';
-  else if (filePath.includes('/model/') || filePath.includes('/data/')) layer = 'data';
-  else if (filePath.includes('/utils/') || filePath.includes('/helpers/')) layer = 'util';
+  else if (filePath.includes('/model/')) layer = 'data';
+  else if (filePath.includes('/utils/')) layer = 'util';
 
   return {
-    summary: `This file (${filePath}) contains code logic. In a real scenario, an LLM would generate a detailed business summary here.`,
+    summary: `Source file located at ${filePath}.`,
     architecture_layer: layer,
-    key_concepts: ['code-structure', 'logic-flow']
+    key_concepts: ['code-structure']
   };
 }

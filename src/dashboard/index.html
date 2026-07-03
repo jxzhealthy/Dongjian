@@ -4,34 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dongjian - 代码知识图谱</title>
-    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <script src="cytoscape.min.js"></script>
     <style>
-        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-        #cy { width: 100vw; height: 100vh; background: #f5f7fa; }
-        .header { position: fixed; top: 0; left: 0; right: 0; padding: 12px 24px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e5e7eb; z-index: 10; display: flex; align-items: center; justify-content: space-between; }
-        .header h1 { margin: 0; font-size: 18px; color: #1f2937; }
-        .stats { font-size: 13px; color: #6b7280; }
-        .legend { position: fixed; bottom: 20px; left: 20px; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 12px; }
-        .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot.file { background: #3b82f6; }
-        .dot.class { background: #10b981; }
-        .dot.function { background: #f59e0b; }
-        .dot.variable { background: #8b5cf6; }
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; height: 100vh; }
+        #sidebar { width: 320px; background: #fff; border-right: 1px solid #e5e7eb; padding: 24px; overflow-y: auto; box-shadow: 2px 0 8px rgba(0,0,0,0.05); z-index: 10; display: flex; flex-direction: column; }
+        #cy { flex: 1; background: #f9fafb; }
+        .search-box { width: 100%; padding: 10px; margin-bottom: 24px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+        .search-box:focus { border-color: #3b82f6; }
+        .info-card h3 { margin-top: 0; color: #111827; font-size: 18px; }
+        .info-card p { color: #4b5563; line-height: 1.6; font-size: 14px; margin: 8px 0; }
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; margin-right: 6px; color: white; font-weight: 500; }
+        .stats { font-size: 12px; color: #9ca3af; margin-top: auto; padding-top: 20px; border-top: 1px solid #f3f4f6; }
+        .placeholder { color: #9ca3af; font-style: italic; text-align: center; margin-top: 40px; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Dongjian (洞见) - 代码知识图谱</h1>
-        <div class="stats" id="stats">加载中...</div>
+    <div id="sidebar">
+        <h2 style="margin-top: 0; color: #1f2937;">Dongjian 洞见</h2>
+        <input type="text" id="search" class="search-box" placeholder="搜索节点名称...">
+        <div id="details">
+            <p class="placeholder">点击图谱中的节点<br>查看代码详情与架构分析</p>
+        </div>
+        <div id="stats" class="stats">加载中...</div>
     </div>
     <div id="cy"></div>
-    <div class="legend">
-        <div class="legend-item"><span class="dot file"></span> 文件</div>
-        <div class="legend-item"><span class="dot class"></span> 类</div>
-        <div class="legend-item"><span class="dot function"></span> 函数/方法</div>
-        <div class="legend-item"><span class="dot variable"></span> 接口/变量</div>
-    </div>
 
     <script>
         const colors = { file: '#3b82f6', class: '#10b981', function: '#f59e0b', variable: '#8b5cf6' };
@@ -39,7 +35,9 @@
 
         async function loadGraph() {
             try {
-                const response = await fetch('dongjian-graph.json');
+                // 添加时间戳避免缓存
+                const response = await fetch('dongjian-graph.json?t=' + Date.now());
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
                 const elements = [];
@@ -51,20 +49,24 @@
                             id: node.id,
                             label: node.label,
                             type: node.type,
-                            summary: node.summary || ''
+                            summary: node.summary || '',
+                            architecture_layer: node.architecture_layer || ''
                         }
                     });
                 });
 
-                // 添加边
+                // 添加边 - 再次过滤确保没有无效边
+                const nodeIds = new Set(data.nodes.map(n => n.id));
                 data.edges.forEach(edge => {
-                    elements.push({
-                        data: {
-                            source: edge.source,
-                            target: edge.target,
-                            type: edge.type
-                        }
-                    });
+                    if (nodeIds.has(edge.source) && nodeIds.has(edge.target)) {
+                        elements.push({
+                            data: {
+                                source: edge.source,
+                                target: edge.target,
+                                type: edge.type
+                            }
+                        });
+                    }
                 });
 
                 const cy = cytoscape({
@@ -114,12 +116,39 @@
                 // 点击节点显示详情
                 cy.on('tap', 'node', function(evt) {
                     const node = evt.target;
-                    console.log('Node:', node.data());
+                    const data = node.data();
+                    
+                    const detailsDiv = document.getElementById('details');
+                    const typeColors = { file: '#3b82f6', class: '#10b981', function: '#f59e0b', variable: '#8b5cf6' };
+                    
+                    detailsDiv.innerHTML = `
+                        <div class="info-card">
+                            <h3>${data.label}</h3>
+                            <span class="tag" style="background-color: ${typeColors[data.type] || '#6b7280'}">${data.type}</span>
+                            <p><strong>ID:</strong> <code style="font-size: 12px; background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">${data.id}</code></p>
+                            <p><strong>架构层级:</strong> ${data.architecture_layer || '未识别'}</p>
+                            <p><strong>摘要:</strong> ${data.summary || '暂无语义分析'}</p>
+                        </div>
+                    `;
+                });
+
+                // 搜索功能
+                document.getElementById('search').addEventListener('input', function(e) {
+                    const term = e.target.value.toLowerCase();
+                    cy.elements().forEach(el => {
+                        if (el.isNode()) {
+                            const label = el.data('label').toLowerCase();
+                            el.style('opacity', label.includes(term) ? 1 : 0.1);
+                        } else {
+                            el.style('opacity', 0.1);
+                        }
+                    });
                 });
 
             } catch (error) {
                 console.error('加载图谱失败:', error);
-                document.getElementById('stats').textContent = '加载失败';
+                document.getElementById('stats').textContent = `加载失败: ${error.message}. 请检查浏览器控制台(F12)。`;
+                document.getElementById('stats').style.color = 'red';
             }
         }
 

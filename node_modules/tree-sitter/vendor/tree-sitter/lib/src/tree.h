@@ -1,6 +1,8 @@
 #ifndef TREE_SITTER_TREE_H_
 #define TREE_SITTER_TREE_H_
 
+#include "./subtree.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -19,8 +21,8 @@ struct TSTree {
   unsigned included_range_count;
 };
 
-TSTree *ts_tree_new(Subtree root, const TSLanguage *language, const TSRange *, unsigned);
-TSNode ts_node_new(const TSTree *, const Subtree *, Length, TSSymbol);
+TSTree *ts_tree_new(Subtree root, const TSLanguage *language, const TSRange *included_ranges, unsigned included_range_count);
+TSNode ts_node_new(const TSTree *tree, const Subtree *subtree, Length position, TSSymbol alias);
 
 #ifdef __cplusplus
 }

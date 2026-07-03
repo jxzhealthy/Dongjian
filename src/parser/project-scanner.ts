@@ -1,10 +1,33 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import Parser from 'tree-sitter';
+// @ts-ignore
 import TypeScript from 'tree-sitter-typescript';
+// @ts-ignore
+import Java from 'tree-sitter-java';
 import { extractImports } from './import-extractor';
 import { analyzeFile } from '../agents/file-analyzer';
-import { calculateHash, detectChanges } from '../core/incremental-sync';
+
+interface LanguageConfig {
+  parser: any;
+  extensions: string[];
+}
+
+const LANGUAGES: Record<string, LanguageConfig> = {
+  typescript: { parser: TypeScript.typescript, extensions: ['.ts', '.tsx'] },
+  javascript: { parser: TypeScript.javascript, extensions: ['.js', '.jsx'] },
+  // @ts-ignore
+  java: { parser: Java, extensions: ['.java'] }, // Java package might export WASM or different structure
+};
+
+function getLanguage(filePath: string): LanguageConfig | null {
+  for (const lang of Object.values(LANGUAGES)) {
+    if (lang.extensions.some(ext => filePath.endsWith(ext))) {
+      return lang;
+    }
+  }
+  return null;
+}
 
 export interface GraphNode {
   id: string;
@@ -54,24 +77,35 @@ function getNodeText(node: any): string {
 // 检测函数调用关系
 function detectCalls(funcNode: any, sourceFuncId: string, edges: GraphEdge[]) {
   const bodyNode = findChildByType(funcNode, 'statement_block') || 
-                   findChildByType(funcNode, 'method_body');
+                   findChildByType(funcNode, 'method_body') ||
+                   findChildByType(funcNode, 'block');
   
   if (!bodyNode) return;
 
-  // 遍历函数体，寻找 call_expression 节点
+  // 遍历函数体，寻找 call_expression (TS/JS) 或 method_invocation (Java) 节点
   function traverseForCalls(node: any) {
-    if (node.type === 'call_expression') {
+    let calledName = '';
+    
+    if (node.type === 'call_expression' || node.type === 'method_invocation') {
       const funcPart = findChildByType(node, 'member_expression') || 
-                       findChildByType(node, 'identifier');
+                       findChildByType(node, 'identifier') ||
+                       findChildByType(node, 'method_name'); // Java uses method_name
       if (funcPart) {
-        const calledName = getNodeText(funcPart);
-        // 这里简化处理，只记录调用名称，实际应该解析出完整的目标函数 ID
-        edges.push({
-          source: sourceFuncId,
-          target: `func:${calledName}`, // 简化目标 ID
-          type: 'calls'
-        });
+        calledName = getNodeText(funcPart);
       }
+    } else if (node.type === 'call') { // Python uses 'call'
+      const funcPart = findChildByType(node, 'attribute') || findChildByType(node, 'identifier');
+      if (funcPart) {
+        calledName = getNodeText(funcPart);
+      }
+    }
+
+    if (calledName) {
+      edges.push({
+        source: sourceFuncId,
+        target: `func:${calledName}`,
+        type: 'calls'
+      });
     }
     
     for (let i = 0; i < node.childCount; i++) {
@@ -85,12 +119,13 @@ function detectCalls(funcNode: any, sourceFuncId: string, edges: GraphEdge[]) {
   traverseForCalls(bodyNode);
 }
 
-export async function parseProject(rootPath: string): Promise<void> {
+export async function parseProject(
+  rootPath: string, 
+  outputFile: string = 'dongjian-graph.json', 
+  excludePatterns: string[] = ['node_modules', 'dist', '.git']
+): Promise<void> {
   console.log(`[Scanner] 开始扫描路径: ${rootPath}`);
   
-  const parser = new Parser();
-  parser.setLanguage(TypeScript.typescript);
-
   const metadata: ProjectMetadata = {
     name: path.basename(rootPath),
     last_updated: new Date().toISOString(),
@@ -99,14 +134,18 @@ export async function parseProject(rootPath: string): Promise<void> {
 
   const nodes: GraphNode[] = [];
   const edges: GraphEdge[] = [];
-  const files = getAllFiles(rootPath);
+  const files = getAllFiles(rootPath, [], excludePatterns);
 
   console.log(`[Scanner] 发现 ${files.length} 个文件，正在解析...`);
 
   for (const filePath of files) {
-    if (!filePath.endsWith('.ts') && !filePath.endsWith('.js')) continue;
+    const langConfig = getLanguage(filePath);
+    if (!langConfig) continue;
 
     try {
+      const parser = new Parser();
+      parser.setLanguage(langConfig.parser);
+      
       const content = fs.readFileSync(filePath, 'utf8');
       const tree = parser.parse(content);
       const relativePath = path.relative(rootPath, filePath);
@@ -156,15 +195,22 @@ export async function parseProject(rootPath: string): Promise<void> {
     edges
   };
 
-  const outputPath = path.join(rootPath, 'dongjian-graph.json');
-  fs.writeFileSync(outputPath, JSON.stringify(graph, null, 2));
-  console.log(`[Scanner] 图谱已保存至: ${outputPath} (包含 ${nodes.length} 个节点, ${edges.length} 条边)`);
+  // 过滤掉指向不存在节点的边
+  const nodeIds = new Set(nodes.map(n => n.id));
+  const validEdges = edges.filter(edge => 
+    nodeIds.has(edge.source) && nodeIds.has(edge.target)
+  );
+
+  const outputPath = path.join(rootPath, outputFile);
+  fs.writeFileSync(outputPath, JSON.stringify({ ...graph, edges: validEdges }, null, 2));
+  console.log(`[Scanner] 图谱已保存至: ${outputPath} (包含 ${nodes.length} 个节点, ${validEdges.length} 条有效边)`);
 }
 
 function extractDeclarations(node: any, parentId: string, nodes: GraphNode[], edges: GraphEdge[]) {
-  // 处理类声明
-  if (node.type === 'class_declaration') {
-    const nameNode = findChildByType(node, 'type_identifier');
+  // 处理类声明 (TS/JS/Java)
+  if (node.type === 'class_declaration' || node.type === 'class_definition') {
+    const nameNode = findChildByType(node, 'type_identifier') || 
+                     findChildByType(node, 'identifier');
     if (nameNode) {
       const className = getNodeText(nameNode);
       const classId = `${parentId}:${className}`;
@@ -181,7 +227,7 @@ function extractDeclarations(node: any, parentId: string, nodes: GraphNode[], ed
       });
 
       // 递归处理类体中的成员
-      const classBody = findChildByType(node, 'class_body');
+      const classBody = findChildByType(node, 'class_body') || findChildByType(node, 'block');
       if (classBody) {
         for (let i = 0; i < classBody.childCount; i++) {
           const child = classBody.child(i);
@@ -194,7 +240,7 @@ function extractDeclarations(node: any, parentId: string, nodes: GraphNode[], ed
     }
   }
 
-  // 处理接口声明
+  // 处理接口声明 (TS/Java)
   if (node.type === 'interface_declaration') {
     const nameNode = findChildByType(node, 'type_identifier');
     if (nameNode) {
@@ -202,7 +248,7 @@ function extractDeclarations(node: any, parentId: string, nodes: GraphNode[], ed
       const interfaceId = `${parentId}:${interfaceName}`;
       nodes.push({
         id: interfaceId,
-        type: 'variable', // 暂时归类为 variable，后续可以细化
+        type: 'variable',
         label: interfaceName,
         parent_id: parentId
       });
@@ -216,8 +262,9 @@ function extractDeclarations(node: any, parentId: string, nodes: GraphNode[], ed
   }
 
   // 处理函数/方法声明
-  if (node.type === 'method_definition' || node.type === 'function_declaration') {
-    const nameNode = findChildByType(node, 'property_identifier') || findChildByType(node, 'identifier');
+  if (node.type === 'method_definition' || node.type === 'function_declaration' || node.type === 'method_declaration' || node.type === 'function_definition') {
+    const nameNode = findChildByType(node, 'property_identifier') || 
+                     findChildByType(node, 'identifier');
     if (nameNode) {
       const funcName = getNodeText(nameNode);
       const funcId = `${parentId}:${funcName}`;
@@ -247,14 +294,18 @@ function extractDeclarations(node: any, parentId: string, nodes: GraphNode[], ed
   }
 }
 
-function getAllFiles(dirPath: string, arrayOfFiles: string[] = []): string[] {
+function getAllFiles(
+  dirPath: string, 
+  arrayOfFiles: string[] = [], 
+  excludePatterns: string[] = ['node_modules', 'dist', '.git']
+): string[] {
   const files = fs.readdirSync(dirPath);
   files.forEach((file) => {
+    if (excludePatterns.includes(file)) return;
+    
     const filePath = path.join(dirPath, file);
     if (fs.statSync(filePath).isDirectory()) {
-      if (!['node_modules', '.git', 'dist'].includes(file)) {
-        arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
-      }
+      arrayOfFiles = getAllFiles(filePath, arrayOfFiles, excludePatterns);
     } else {
       arrayOfFiles.push(filePath);
     }

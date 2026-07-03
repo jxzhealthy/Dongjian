@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Dongjian Graph Viewer</title>
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; overflow: hidden; }
+        #cy { width: 100vw; height: 100vh; background: #f5f5f5; }
+        #sidebar {
+            position: absolute; top: 0; right: 0; width: 300px; height: 100%;
+            background: white; box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            padding: 20px; overflow-y: auto; transform: translateX(100%); transition: transform 0.3s;
+        }
+        #sidebar.active { transform: translateX(0); }
+        .node-info h2 { margin-top: 0; color: #333; }
+        .node-info p { color: #666; line-height: 1.6; }
+        .tag { display: inline-block; padding: 4px 8px; background: #e0e7ff; color: #4f46e5; border-radius: 4px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div id="sidebar">
+        <div class="node-info" id="info-content">点击节点查看详情</div>
+    </div>
+
+    <script>
+        // 这里会被 Node.js 动态注入数据
+        const graphData = {{GRAPH_DATA}};
+
+        cytoscape({
+            container: document.getElementById('cy'),
+            elements: {
+                nodes: graphData.nodes.map(n => ({ 
+                    data: { id: n.id, label: n.label, type: n.type, summary: n.summary, layer: n.architecture_layer } 
+                })),
+                edges: graphData.edges.map(e => ({ 
+                    data: { source: e.source, target: e.target, label: e.type } 
+                }))
+            },
+            style: [
+                { selector: 'node', style: { 'label': 'data(label)', 'background-color': '#4f46e5', 'color': '#fff' } },
+                { selector: 'edge', style: { 'width': 2, 'line-color': '#ccc', 'target-arrow-color': '#ccc', 'target-arrow-shape': 'triangle' } }
+            ],
+            layout: { name: 'cose', animate: true }
+        });
+
+        cy.on('tap', 'node', function(evt){
+            const node = evt.target;
+            const data = node.data();
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('info-content');
+            
+            content.innerHTML = `
+                <h2>${data.label}</h2>
+                <span class="tag">${data.type}</span>
+                ${data.layer ? `<span class="tag">${data.layer}</span>` : ''}
+                <p><strong>ID:</strong> ${data.id}</p>
+                <p><strong>摘要:</strong> ${data.summary || '暂无'}</p>
+            `;
+            sidebar.classList.add('active');
+        });
+
+        cy.on('tap', function(evt){
+            if(evt.target === cy){
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

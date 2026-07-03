@@ -1,0 +1,1562 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "name": ".",
+    "last_updated": "2026-07-03T07:02:18.291Z",
+    "language_stats": {}
+  },
+  "nodes": [
+    {
+      "id": "file:src/agents/file-analyzer.ts",
+      "type": "file",
+      "label": "file-analyzer.ts",
+      "summary": "该文件作为代码分析 Agent，通过调用 DashScope 大语言模型对 TypeScript 源码进行语义分析以提取摘要、识别架构层级和关键概念，并具备基于文件路径的启发式降级容错机制。",
+      "architecture_layer": "core"
+    },
+    {
+      "id": "file:src/agents/file-analyzer.ts:AnalysisResult",
+      "type": "variable",
+      "label": "AnalysisResult",
+      "parent_id": "file:src/agents/file-analyzer.ts"
+    },
+    {
+      "id": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "type": "function",
+      "label": "analyzeFile",
+      "parent_id": "file:src/agents/file-analyzer.ts"
+    },
+    {
+      "id": "file:src/agents/file-analyzer.ts:getHeuristicAnalysis",
+      "type": "function",
+      "label": "getHeuristicAnalysis",
+      "parent_id": "file:src/agents/file-analyzer.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts",
+      "type": "file",
+      "label": "incremental-sync.ts",
+      "summary": "基于 SHA-256 哈希比对实现本地代码文件的增量变更检测，精准识别文件的新增、修改与删除状态。",
+      "architecture_layer": "core"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:FileChange",
+      "type": "variable",
+      "label": "FileChange",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:calculateHash",
+      "type": "function",
+      "label": "calculateHash",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:detectChanges",
+      "type": "function",
+      "label": "detectChanges",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/core/incremental-sync.ts:getAllFiles",
+      "type": "function",
+      "label": "getAllFiles",
+      "parent_id": "file:src/core/incremental-sync.ts"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js",
+      "type": "file",
+      "label": "cytoscape.min.js",
+      "summary": "该文件是 Cytoscape.js 图可视化库的压缩版核心代码，提供图结构数据管理、网络图渲染及交互分析的底层引擎支持。",
+      "architecture_layer": "core"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "function",
+      "label": "e",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:t",
+      "type": "function",
+      "label": "t",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:n",
+      "type": "function",
+      "label": "n",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:r",
+      "type": "function",
+      "label": "r",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:i",
+      "type": "function",
+      "label": "i",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:a",
+      "type": "function",
+      "label": "a",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:o",
+      "type": "function",
+      "label": "o",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:u",
+      "type": "function",
+      "label": "u",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:p",
+      "type": "function",
+      "label": "p",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:f",
+      "type": "function",
+      "label": "f",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:g",
+      "type": "function",
+      "label": "g",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:v",
+      "type": "function",
+      "label": "v",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "function",
+      "label": "y",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:m",
+      "type": "function",
+      "label": "m",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "function",
+      "label": "e",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "function",
+      "label": "e",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "function",
+      "label": "e",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:_n",
+      "type": "function",
+      "label": "_n",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Xr",
+      "type": "function",
+      "label": "Xr",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ei",
+      "type": "function",
+      "label": "ei",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ci",
+      "type": "function",
+      "label": "ci",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:hi",
+      "type": "function",
+      "label": "hi",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Pa",
+      "type": "function",
+      "label": "Pa",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Da",
+      "type": "function",
+      "label": "Da",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ta",
+      "type": "function",
+      "label": "Ta",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:_a",
+      "type": "function",
+      "label": "_a",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ia",
+      "type": "function",
+      "label": "Ia",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Aa",
+      "type": "function",
+      "label": "Aa",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:n",
+      "type": "function",
+      "label": "n",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "function",
+      "label": "y",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:lo",
+      "type": "function",
+      "label": "lo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:uo",
+      "type": "function",
+      "label": "uo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:go",
+      "type": "function",
+      "label": "go",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:r",
+      "type": "function",
+      "label": "r",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:a",
+      "type": "function",
+      "label": "a",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:_o",
+      "type": "function",
+      "label": "_o",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Mo",
+      "type": "function",
+      "label": "Mo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Bo",
+      "type": "function",
+      "label": "Bo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:zo",
+      "type": "function",
+      "label": "zo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Io",
+      "type": "function",
+      "label": "Io",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:jo",
+      "type": "function",
+      "label": "jo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:qo",
+      "type": "function",
+      "label": "qo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ko",
+      "type": "function",
+      "label": "Ko",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Go",
+      "type": "function",
+      "label": "Go",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Uo",
+      "type": "function",
+      "label": "Uo",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:map",
+      "type": "function",
+      "label": "map",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:map",
+      "type": "function",
+      "label": "map",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:o",
+      "type": "function",
+      "label": "o",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:s",
+      "type": "function",
+      "label": "s",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:l",
+      "type": "function",
+      "label": "l",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:h",
+      "type": "function",
+      "label": "h",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:p",
+      "type": "function",
+      "label": "p",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:g",
+      "type": "function",
+      "label": "g",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "function",
+      "label": "e",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:t",
+      "type": "function",
+      "label": "t",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:n",
+      "type": "function",
+      "label": "n",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:p",
+      "type": "function",
+      "label": "p",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:f",
+      "type": "function",
+      "label": "f",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:g",
+      "type": "function",
+      "label": "g",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:v",
+      "type": "function",
+      "label": "v",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "function",
+      "label": "y",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:m",
+      "type": "function",
+      "label": "m",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:b",
+      "type": "function",
+      "label": "b",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:x",
+      "type": "function",
+      "label": "x",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:w",
+      "type": "function",
+      "label": "w",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:k",
+      "type": "function",
+      "label": "k",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ns",
+      "type": "function",
+      "label": "ns",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:rs",
+      "type": "function",
+      "label": "rs",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:is",
+      "type": "function",
+      "label": "is",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:as",
+      "type": "function",
+      "label": "as",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:os",
+      "type": "function",
+      "label": "os",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ss",
+      "type": "function",
+      "label": "ss",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ls",
+      "type": "function",
+      "label": "ls",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:i",
+      "type": "function",
+      "label": "i",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:a",
+      "type": "function",
+      "label": "a",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:o",
+      "type": "function",
+      "label": "o",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Rs",
+      "type": "function",
+      "label": "Rs",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Fs",
+      "type": "function",
+      "label": "Fs",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ys",
+      "type": "function",
+      "label": "Ys",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ws",
+      "type": "function",
+      "label": "Ws",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:hl",
+      "type": "function",
+      "label": "hl",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:fl",
+      "type": "function",
+      "label": "fl",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:vl",
+      "type": "function",
+      "label": "vl",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ml",
+      "type": "function",
+      "label": "ml",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:xl",
+      "type": "function",
+      "label": "xl",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:v",
+      "type": "function",
+      "label": "v",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "function",
+      "label": "y",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:m",
+      "type": "function",
+      "label": "m",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:b",
+      "type": "function",
+      "label": "b",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:x",
+      "type": "function",
+      "label": "x",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Dl",
+      "type": "function",
+      "label": "Dl",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ml",
+      "type": "function",
+      "label": "Ml",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:d",
+      "type": "function",
+      "label": "d",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "function",
+      "label": "e",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:iu",
+      "type": "function",
+      "label": "iu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:au",
+      "type": "function",
+      "label": "au",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:ou",
+      "type": "function",
+      "label": "ou",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:su",
+      "type": "function",
+      "label": "su",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:lu",
+      "type": "function",
+      "label": "lu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:xu",
+      "type": "function",
+      "label": "xu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:P",
+      "type": "function",
+      "label": "P",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:D",
+      "type": "function",
+      "label": "D",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Nu",
+      "type": "function",
+      "label": "Nu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:zu",
+      "type": "function",
+      "label": "zu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Ou",
+      "type": "function",
+      "label": "Ou",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:qu",
+      "type": "function",
+      "label": "qu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Yu",
+      "type": "function",
+      "label": "Yu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Xu",
+      "type": "function",
+      "label": "Xu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/dashboard/cytoscape.min.js:Wu",
+      "type": "function",
+      "label": "Wu",
+      "parent_id": "file:src/dashboard/cytoscape.min.js"
+    },
+    {
+      "id": "file:src/index.ts",
+      "type": "file",
+      "label": "index.ts",
+      "summary": "作为CLI命令行工具的入口文件，解析用户输入的扫描命令并触发代码项目解析与知识图谱生成的业务流程。",
+      "architecture_layer": "api"
+    },
+    {
+      "id": "file:src/parser/import-extractor.ts",
+      "type": "file",
+      "label": "import-extractor.ts",
+      "summary": "使用正则表达式从源代码中提取 ES6 import 语句的导入符号与来源路径，并尝试将相对路径解析为实际文件路径",
+      "architecture_layer": "util"
+    },
+    {
+      "id": "file:src/parser/import-extractor.ts:ImportInfo",
+      "type": "variable",
+      "label": "ImportInfo",
+      "parent_id": "file:src/parser/import-extractor.ts"
+    },
+    {
+      "id": "file:src/parser/import-extractor.ts:extractImports",
+      "type": "function",
+      "label": "extractImports",
+      "parent_id": "file:src/parser/import-extractor.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts",
+      "type": "file",
+      "label": "project-scanner.ts",
+      "summary": "使用 Tree-sitter 解析项目代码 AST 并结合 AI 语义分析，构建包含文件依赖、代码结构和调用关系的代码知识图谱。",
+      "architecture_layer": "core"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:GraphNode",
+      "type": "variable",
+      "label": "GraphNode",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:GraphEdge",
+      "type": "variable",
+      "label": "GraphEdge",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:ProjectMetadata",
+      "type": "variable",
+      "label": "ProjectMetadata",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:KnowledgeGraph",
+      "type": "variable",
+      "label": "KnowledgeGraph",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:findChildByType",
+      "type": "function",
+      "label": "findChildByType",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:getNodeText",
+      "type": "function",
+      "label": "getNodeText",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:detectCalls",
+      "type": "function",
+      "label": "detectCalls",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:traverseForCalls",
+      "type": "function",
+      "label": "traverseForCalls",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:parseProject",
+      "type": "function",
+      "label": "parseProject",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:extractDeclarations",
+      "type": "function",
+      "label": "extractDeclarations",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/parser/project-scanner.ts:getAllFiles",
+      "type": "function",
+      "label": "getAllFiles",
+      "parent_id": "file:src/parser/project-scanner.ts"
+    },
+    {
+      "id": "file:src/types/tree-sitter-typescript.d.ts",
+      "type": "file",
+      "label": "tree-sitter-typescript.d.ts",
+      "summary": "为第三方库 tree-sitter-typescript 提供环境模块声明，以消除 TypeScript 编译时的模块导入类型错误。",
+      "architecture_layer": "util"
+    },
+    {
+      "id": "file:tests/fixtures/sample-service.ts",
+      "type": "file",
+      "label": "sample-service.ts",
+      "summary": "提供基于内存数组的用户增删查异步操作服务，作为测试夹具模拟业务逻辑层。",
+      "architecture_layer": "service"
+    },
+    {
+      "id": "file:tests/fixtures/sample-service.ts:UserService",
+      "type": "class",
+      "label": "UserService",
+      "parent_id": "file:tests/fixtures/sample-service.ts"
+    },
+    {
+      "id": "file:tests/fixtures/sample-service.ts:UserService:getUserById",
+      "type": "function",
+      "label": "getUserById",
+      "parent_id": "file:tests/fixtures/sample-service.ts:UserService"
+    },
+    {
+      "id": "file:tests/fixtures/sample-service.ts:UserService:createUser",
+      "type": "function",
+      "label": "createUser",
+      "parent_id": "file:tests/fixtures/sample-service.ts:UserService"
+    },
+    {
+      "id": "file:tests/fixtures/sample-service.ts:UserService:deleteUser",
+      "type": "function",
+      "label": "deleteUser",
+      "parent_id": "file:tests/fixtures/sample-service.ts:UserService"
+    },
+    {
+      "id": "file:tests/fixtures/sample-service.ts:User",
+      "type": "variable",
+      "label": "User",
+      "parent_id": "file:tests/fixtures/sample-service.ts"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/agents/file-analyzer.ts",
+      "target": "file:src/agents/file-analyzer.ts:AnalysisResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts",
+      "target": "file:src/agents/file-analyzer.ts:analyzeFile",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/agents/file-analyzer.ts",
+      "target": "file:src/agents/file-analyzer.ts:getHeuristicAnalysis",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:FileChange",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:calculateHash",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:detectChanges",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/core/incremental-sync.ts",
+      "target": "file:src/core/incremental-sync.ts:getAllFiles",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:t",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:n",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:r",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:i",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:a",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:o",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:u",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:p",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:f",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:g",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:v",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:m",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:_n",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Xr",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ei",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ci",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:hi",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Pa",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Da",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ta",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:_a",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ia",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Aa",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:n",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:lo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:uo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:go",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:r",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:a",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:_o",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Mo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Bo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:zo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Io",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:jo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:qo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ko",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Go",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Uo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:map",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:map",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:o",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:s",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:l",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:h",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:p",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:g",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:t",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:n",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:p",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:f",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:g",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:v",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:m",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:b",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:x",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:w",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:k",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ns",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:rs",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:is",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:as",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:os",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ss",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ls",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:i",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:a",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:o",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Rs",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Fs",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ys",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ws",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:hl",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:fl",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:vl",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ml",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:xl",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:v",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:y",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:m",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:b",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:x",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Dl",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ml",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:d",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:e",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:iu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:au",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:ou",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:su",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:lu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:xu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:P",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:D",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Nu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:zu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Ou",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:qu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Yu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Xu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/dashboard/cytoscape.min.js",
+      "target": "file:src/dashboard/cytoscape.min.js:Wu",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/parser/project-scanner.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/parser/import-extractor.ts",
+      "target": "file:src/parser/import-extractor.ts:ImportInfo",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/import-extractor.ts",
+      "target": "file:src/parser/import-extractor.ts:extractImports",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/import-extractor.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/agents/file-analyzer.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/core/incremental-sync.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:GraphNode",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:GraphEdge",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:ProjectMetadata",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:KnowledgeGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:findChildByType",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:getNodeText",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:detectCalls",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:traverseForCalls",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:parseProject",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:extractDeclarations",
+      "type": "contains"
+    },
+    {
+      "source": "file:src/parser/project-scanner.ts",
+      "target": "file:src/parser/project-scanner.ts:getAllFiles",
+      "type": "contains"
+    },
+    {
+      "source": "file:tests/fixtures/sample-service.ts",
+      "target": "file:tests/fixtures/sample-service.ts:UserService",
+      "type": "contains"
+    },
+    {
+      "source": "file:tests/fixtures/sample-service.ts:UserService",
+      "target": "file:tests/fixtures/sample-service.ts:UserService:getUserById",
+      "type": "contains"
+    },
+    {
+      "source": "file:tests/fixtures/sample-service.ts:UserService",
+      "target": "file:tests/fixtures/sample-service.ts:UserService:createUser",
+      "type": "contains"
+    },
+    {
+      "source": "file:tests/fixtures/sample-service.ts:UserService",
+      "target": "file:tests/fixtures/sample-service.ts:UserService:deleteUser",
+      "type": "contains"
+    },
+    {
+      "source": "file:tests/fixtures/sample-service.ts",
+      "target": "file:tests/fixtures/sample-service.ts:User",
+      "type": "contains"
+    }
+  ]
+}
